@@ -192,17 +192,22 @@ void loop() {
           client.print(F("<html>\r\n"));
           client.print(F("<head>\r\n"));
           client.print(F("<title>LockBox</title>\r\n"));
+          client.print(F("<link href=\"https://fonts.googleapis.com/css?family=Orbitron\" rel=\"stylesheet\">\r\n"));
           client.print(F("<link type=\"text/css\" rel=\"stylesheet\" href=\"https://grodvidar.github.io/css/lockBoxStyle.css\">\r\n"));
           client.print(F("<link rel=\"shortcut icon\" href=\"about:blank\">\r\n"));
           client.print(F("</head>\r\n"));
           client.print(F("<body>\r\n"));
           client.print(F("<h1>The Lock Box!</h1>\r\n"));
-          client.print(F("<div>\r\n"));
+          client.print(F("<div id=\"outer\">\r\n"));
+          client.print(F("<div id=\"inner\">\r\n"));
           client.print(F("<form autocomplete=\"off\">\r\n"));
           client.print(F("<label id=\"entry\">Passcode: </label>\r\n"));
           client.print(F("<input name=\"num\" type=\"number\" required autofocus max=\"9999\" min=\"0\" placeholder = \"0000-9999\"/>\r\n"));
-          client.print(F("<input type=\"submit\" value=\"Submit\"/>\r\n"));
+          //client.print(F("<input type=\"submit\" value=\"Submit\"/>\r\n"));
           client.print(F("</form>\r\n"));
+          client.print(F("</div>\r\n"));
+          client.print(F("</div>\r\n"));
+          client.print(F("<div id=\"keypad\">\r\n"));
           client.print(F("</div>\r\n"));
           client.print(F("</body>\r\n"));
           client.print(F("</html>\r\n"));
@@ -219,7 +224,7 @@ void loop() {
       }
     }
 
-    delay(3000);
+    delay(2000);
     client.stop();
     Serial.println(F("Client dcd"));
   }
