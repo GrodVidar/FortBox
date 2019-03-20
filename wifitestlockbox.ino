@@ -6,6 +6,8 @@
 #include <LCD.h>
 #include <LiquidCrystal_I2C.h>
 
+#define BUZZ 12
+
 SoftwareSerial SerialWifi(11,10);
 
 char ssid[] = "PaddVidar";
@@ -43,10 +45,10 @@ Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 void setup() {
   servo1.attach(A0);
-  servo1.write(110);
+  /*servo1.write(110);
   delay(1000);
   servo1.write(10);
-  delay(800);
+  delay(800);*/
   pinMode(A0,INPUT);
   lcd.begin(16,2);
   lcd.backlight();
@@ -116,6 +118,17 @@ void openBox()
   
   if(i_pass==i_answer)
   {
+    tone(BUZZ,523);
+    delay(250);
+    noTone(BUZZ);
+    delay(10);
+    tone(BUZZ,659);
+    delay(250);
+    noTone(BUZZ);
+    delay(10);
+    tone(BUZZ,784);
+    delay(250);
+    noTone(BUZZ);
     lcd.setCursor(0,0);
     lcd.print("OPENING");
     pinMode(A0,OUTPUT);
@@ -130,13 +143,25 @@ void openBox()
   }
   else
   {
+    tone(BUZZ,55);
+    delay(150);
+    noTone(BUZZ);
+    delay(100);
+    tone(BUZZ,55);
+    delay(150);
+    noTone(BUZZ);
+    delay(100);
+    tone(BUZZ,55);
+    delay(150);
+    noTone(BUZZ);
     for(counter;counter<4;counter++)
-    {
+    {      
       lcd.print("WRONG PASSCODE");
       delay(300);
       lcd.clear();
       delay(300);
     }
+    hej=0;
     counter = 0;
   }
 }
@@ -146,6 +171,10 @@ else if(key != NO_KEY&& key == '*')
   servo1.write(10);
   delay(2000);
   pinMode(A0,INPUT);
+  //opened = true;
+}
+else if(key != NO_KEY && key == 'A')
+{
   opened = true;
 }
   }
