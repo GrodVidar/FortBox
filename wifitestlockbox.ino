@@ -65,9 +65,9 @@ void setup() {
   /*for trouble shooting, opens the servo then
     closes it on start-up
   servo1.write(110);
-  delay(1000);
-  servo1.write(10);
-  delay(800);*/
+  delay(1000);*/
+  servo1.write(0);
+  delay(500);
   //making the servo seem like an INPUT device
   //so that the wifi code wont make it wobble
   pinMode(A0,INPUT);
@@ -197,7 +197,7 @@ void openBox()
 else if(key != NO_KEY&& key == '*')
 {
   pinMode(A0,OUTPUT);
-  servo1.write(10);
+  servo1.write(0);
   delay(2000);
   pinMode(A0,INPUT);
   //opened = true;
@@ -205,6 +205,14 @@ else if(key != NO_KEY&& key == '*')
 //if the user presses A or '2ND' the arduino will exit the openBox function and return to void loop()
 else if(key != NO_KEY && key == 'A')
 {
+  IPAddress ip = WiFi.localIP();
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Exiting");
+  delay(3000);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print(ip);
   opened = true;
 }
   }
@@ -253,13 +261,13 @@ void loop() {
           client.print(F("<!DOCTYPE HTML>\r\n"));
           client.print(F("<html>\r\n"));
           client.print(F("<head>\r\n"));
-          client.print(F("<title>LockBox</title>\r\n"));
+          client.print(F("<title>FortBox</title>\r\n"));
           client.print(F("<link href=\"https://fonts.googleapis.com/css?family=Orbitron\" rel=\"stylesheet\">\r\n"));
           client.print(F("<link type=\"text/css\" rel=\"stylesheet\" href=\"https://grodvidar.github.io/css/lockBoxStyle.css\">\r\n"));
           client.print(F("<link rel=\"shortcut icon\" href=\"about:blank\">\r\n"));
           client.print(F("</head>\r\n"));
           client.print(F("<body>\r\n"));
-          client.print(F("<h1>The Lock Box!</h1>\r\n"));
+          client.print(F("<h1>FortBox!</h1>\r\n"));
           client.print(F("<div id=\"outer\">\r\n"));
           client.print(F("<div id=\"inner\">\r\n"));
           client.print(F("<form autocomplete=\"off\">\r\n"));
